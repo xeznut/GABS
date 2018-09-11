@@ -1,0 +1,24 @@
+
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar><mat-icon>security</mat-icon></div>
+        <mat-card-title>Autenticação</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Username" [(ngModel)]="username" (keyup.enter)="login()" >
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <input matInput placeholder="Password" [(ngModel)]="password" (keyup.enter)="login()" [type]="hide ? 'password' : 'text'">
+        </mat-form-field>
+        <button mat-icon-button (click)="hide = !hide">
+            <mat-icon aria-label="Colapsar">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
+        <br/>
+        <mat-checkbox [(ngModel)]="remember"> Manter sessão ligada neste dispositivo</mat-checkbox>
+        <br/>
+        <br/>
+        <button mat-raised-button (click)="login()"><mat-icon>vpn_key</mat-icon> LOGIN</button>
+    </mat-card-content>
+</mat-card>

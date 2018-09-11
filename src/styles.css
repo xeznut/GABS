@@ -1,1 +1,462 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 14px;
+    line-height: 1.4em;
+}
+h2 {
+    margin: 16px 0 8px 8px;
+    font: 100 18px 'Roboto',sans-serif;
+    letter-spacing: 0;
+}
+
+h2 a {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+h2.withRefresh {
+    padding-left: 16px !important;
+    height: 40px;
+}
+
+a {
+    color: #000;
+}
+
+.mainHeader {
+    height: 45px;
+}
+
+.mainHeader .logo {
+    height: 45px;
+    display: table-cell;
+    position: relative;
+}
+.mainHeader .logo img {
+    height: 45px;
+}
+.mainHeader .customerIDIcon {
+    height: 45px;
+    min-width: 24px;
+    vertical-align: top;
+    display: table-cell;
+    padding-top: 9px;
+    padding-left: 20px;
+    position: relative;
+}
+.mainHeader .customerIDIcon mat-icon {
+    font-size: 28px;
+}
+.mainHeader .customerID {
+    clear: both;
+    height: 45px;
+    font-size: 22px;
+    font-weight: 400;
+    vertical-align: top;
+    padding-top: 14px;
+    display: table-cell;
+    position: relative;
+    min-width: 100px;
+}
+.mainHeader .appTitle {
+    height: 45px;
+    font-size: 28px;
+    font-weight: 600;
+    vertical-align: top;
+    display: table-cell;
+    position: relative;
+    padding-top: 6px;
+    padding-left: 100px;
+    width: 100%;
+}
+.mainHeader .logout {
+    height: 45px;
+    vertical-align: top;
+    display: table-cell;
+    position: relative;
+}
+.infoCell > .mat-figure {
+    display: block !important;
+}
+
+.infoLabelCell {
+    font-weight: bold;
+}
+
+.tabInformationColor .infoLabelCell,
+.tabInformationColor h2 {
+    background-color: rgba(103, 30, 117, .2);
+    padding: 4px;
+    margin-left: 0px;
+}
+
+.tabBillingColor .infoLabelCell,
+.tabBillingColor h2 {
+    background-color: rgba(255, 102, 0, .4);
+    padding: 4px;
+    margin-left: 0px;
+}
+
+.tabTechColor .infoLabelCell,
+.tabTechColor h2 {
+    background-color: rgba(211, 187, 168, 1);
+    padding: 4px;
+    margin-left: 0px;
+}
+
+.infoDataCell {
+
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+}
+
+.mat-divider {
+    position: relative !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.mat-grid-tile .mat-figure {
+    display: inline !important;
+}
+
+.mat-grid-tile {
+    white-space: nowrap;
+}
+
+.alertCard {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    line-height: 1em;
+}
+.alertCard mat-card-content > div:first-child {
+    float: left;
+    width: 50px;
+}
+
+alertCard mat-card-content p {
+    line-height: 1em;
+}
+
+.alertCard mat-icon {
+    font-size: 40px;
+    height: 42px;
+}
+
+#alertCardANOMALIA {
+    background-color: rgba(255, 0, 0, .2);
+}
+#alertCardALERTA {
+    background-color: rgba(243, 205, 36, .2);
+}
+#alertCardPROMOVER {
+    background-color: rgba(40, 136, 40, .2);
+}
+#alertCardDADOSCLIENTE {
+    background-color: rgba(40, 136, 201, .2);
+}
+
+.searchResult {
+    cursor: pointer;
+}
+.searchResult h1 {
+    font-size: 18px;
+    padding: 0px;
+    margin: 0px;
+}
+.searchResult mat-icon {
+    font-size: 50px;
+    position: absolute;
+    top: 20px;
+}
+
+/* loading components effects */
+.spinner {
+    position: fixed;
+    top: 31px;
+    right: 7px;
+    z-index: 999;
+}
+
+.mat-simple-snackbar-action {
+    color: #fc4d09 !important;
+}
+
+
+.double-bounce1, .double-bounce2 {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+background-color: #550073;
+opacity: 0.6;
+position: absolute;
+top: 0;
+left: 0;
+
+-webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+background-color: #550073;
+-webkit-animation-delay: -1.0s;
+animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+0%, 100% { -webkit-transform: scale(0.0) }
+50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+} 50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+}
+}
+
+
+.cube1, .cube2 {
+    background-color: #888;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
+    animation: sk-cubemove 1.8s infinite ease-in-out;
+}
+
+.cube2 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+@-webkit-keyframes sk-cubemove {
+    25% { -webkit-transform: translateX(32px) rotate(-90deg) scale(0.5) }
+    50% { -webkit-transform: translateX(32px) translateY(32px) rotate(-180deg) }
+    75% { -webkit-transform: translateX(0px) translateY(32px) rotate(-270deg) scale(0.5) }
+    100% { -webkit-transform: rotate(-360deg) }
+}
+
+@keyframes sk-cubemove {
+    25% {
+    transform: translateX(32px) rotate(-90deg) scale(0.5);
+    -webkit-transform: translateX(32px) rotate(-90deg) scale(0.5);
+    } 50% {
+    transform: translateX(32px) translateY(32px) rotate(-179deg);
+    -webkit-transform: translateX(32px) translateY(32px) rotate(-179deg);
+    } 50.1% {
+    transform: translateX(32px) translateY(32px) rotate(-180deg);
+    -webkit-transform: translateX(32px) translateY(32px) rotate(-180deg);
+    } 75% {
+    transform: translateX(0px) translateY(32px) rotate(-270deg) scale(0.5);
+    -webkit-transform: translateX(0px) translateY(32px) rotate(-270deg) scale(0.5);
+    } 100% {
+    transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+    }
+}
+/* end loading components effects */
+
+/* Nice reply */
+.niceReplyCard {
+    width: 23%;
+    min-width: 200px;
+    float: left;
+    padding-left: 5px;
+}
+.niceReplyCard > div:nth-child(2) {
+    text-align: left;
+    font-weight: 600;
+}
+.niceReplyCard mat-icon:first-child {
+    font-size: 16px;
+    float: left;
+    height: 20px;
+}
+.niceReplyCard span {
+    padding-left: 5px;
+}
+
+.niceReplyFace {
+    font-size: 50px;
+    float: left;
+    width: 50px !important;
+    height: 50px !important;
+}
+
+
+.mat-grid-tile p {
+    white-space: normal;
+}
+
+.mat-grid span {
+    white-space: normal !important;
+}
+
+.niceReplyDissatisfied {
+    color: #FF5647;
+}
+.niceReplyNeutral {
+    color: #FFB21E;
+}
+.niceReplySatisfied {
+    color: #3CB500;
+}
+
+.actServiceTile {
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 8px;
+    width: 90%;
+    height: 28px;
+    padding-left: 10px;
+    padding-top: 5px;
+    line-height: 0.9em;
+    font-size: 18px;
+}
+.actServiceTile mat-icon {
+    font-size: 18px;
+}
+
+.actServiceDetail {
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 8px;
+    width: 90%;
+    padding-left: 10px;
+    padding-top: 5px;
+    line-height: 1.1em;
+    font-size: 14px;
+}
+
+.serviceInternet {
+    background-color: #a0c6f5;
+    border-color: #385d8a;
+}
+.serviceTelefone {
+    background-color: #faa19e;
+    border-color: #8c3836;
+}
+.serviceMovel {
+    background-color: #f7b783;
+    border-color: #b66d31;
+}
+.serviceTelevisao {
+    background-color: #ceeb94;
+    border-color: #71893f;
+}
+.serviceDisabled {
+    background-color: #fafafa;
+    border-color: #dddddd;
+    color: #dddddd;
+}
+
+.mat-expansion-panel-header-title {
+    font-weight: 800;
+}
+.mat-expansion-panel {
+    margin-bottom: 5px !important;
+}
+
+.interacoesTile {
+    width: 18%;
+    min-width: 200px;
+    float: left;
+    padding-left: 5px;
+}
+.interacoesTile > div:nth-child(2) {
+    font-weight: 600;
+    text-align: left;
+    line-height: 1.2em;
+}
+.interacoesTile mat-icon {
+    font-size: 16px;
+    float: left;
+    height: 16px;
+}
+
+.equipamentosTile {
+    width: 23%;
+    min-width: 200px;
+    float: left;
+    padding-left: 5px;
+}
+.equipamentosTile > div:nth-child(2) {
+    font-weight: 600;
+    text-align: left;
+    line-height: 1.2em;
+}
+.equipamentosTile mat-icon {
+    font-size: 16px;
+    float: left;
+    height: 16px;
+}
+
+.vertDivider {
+    width: 1px;
+    background-color: #ccc;
+    float: left;
+    margin-right: 10px;
+}
+
+
+.mat-icon svg {
+    transform: scale(0.7);
+    height: 24px;
+    width: 24px;
+}
+
+.invoiceStatusCORTE {
+    color: red;
+}
+.invoiceStatusREDUCSERVICO {
+    color: orange;
+}
+.invoiceStatusSUSPTOTALFPAG  {
+    color: fuchsia;
+}
+.invoiceStatusACTIVO {
+    color: darkolivegreen;
+}
+
+.mat-tab-header {
+    position: fixed !important;
+    top: 55px;
+    background-color: #fff;
+    z-index: 100;
+    left: 8px;
+    right: 8px;
+}
+
+div.mainHeader {
+    position:fixed;
+    background-color: #fff;
+    z-index: 100;
+    height: 87px;
+    padding: 8px 8px 0px 8px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+div.headerSpacer {
+    padding-top:95px;
+}
