@@ -43,9 +43,9 @@ const ELEMENT_DATA: LockSite[] = [
     }],
     detectionDate: '07-09-2018 18:35', validFrom: '08-09-2018 19:45', validTo: '10-09-2018 10:32', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Created' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processed' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activated' },
+      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
+      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
     ],
   },
   {
@@ -53,9 +53,9 @@ const ELEMENT_DATA: LockSite[] = [
     sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
     detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Created' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processed' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activated' },
+      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
+      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
     ],
   },
   {
@@ -63,9 +63,9 @@ const ELEMENT_DATA: LockSite[] = [
     sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
     detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Created' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processed' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activated' },
+      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
+      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
     ],
   },
   {
@@ -73,9 +73,9 @@ const ELEMENT_DATA: LockSite[] = [
     sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
     detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Created' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processed' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activated' },
+      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
+      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
     ],
   },
   {
@@ -83,9 +83,9 @@ const ELEMENT_DATA: LockSite[] = [
     sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
     detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Created' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processed' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activated' },
+      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
+      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
     ],
   },
   {
@@ -96,9 +96,9 @@ const ELEMENT_DATA: LockSite[] = [
     }],
     detectionDate: '07-09-2018 18:35', validFrom: '08-09-2018 19:45', validTo: '10-09-2018 10:32', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Created' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processed' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activated' },
+      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
+      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
     ],
   },
   {
@@ -109,9 +109,9 @@ const ELEMENT_DATA: LockSite[] = [
     }],
     detectionDate: '07-09-2018 18:35', validFrom: '08-09-2018 19:45', validTo: '10-09-2018 10:32', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Created' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processed' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activated' },
+      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
+      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
     ],
   },
 ];
