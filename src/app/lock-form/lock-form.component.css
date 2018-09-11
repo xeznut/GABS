@@ -3,3 +3,7 @@ h2 {
     font: 100 18px 'Roboto',sans-serif;
     font-weight: bolder;
   }
+
+  .mat-toolbar > .mat-raised-button {
+    margin: 10px;
+  }
