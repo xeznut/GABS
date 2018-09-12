@@ -16,16 +16,25 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
+      <mat-select placeholder="Entidade" [(ngModel)]="lockSite.entity">
+        <mat-option *ngFor="let entity of entityCodes" [value]="entity">
+          {{getEntity(entity)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
       <input type="text" matInput placeholder="Titular dos direitos" [(ngModel)]="lockSite.contentOwner">
     </mat-form-field>
   </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="5" rowHeight="5:1">
   <mat-grid-tile>
     <mat-form-field>
       <input type="datetime-local" matInput placeholder="Data da Detecção" [(ngModel)]="lockSite.detectionDate">
     </mat-form-field>
   </mat-grid-tile>
-</mat-grid-list>
-<mat-grid-list cols="5" rowHeight="5:1">
   <mat-grid-tile>
     <mat-form-field>
       <input type="datetime-local" matInput placeholder="Data de Inicio do Bloqueio" [(ngModel)]="lockSite.validFrom">
@@ -93,6 +102,6 @@
     <mat-icon>save</mat-icon> Adicionar
   </button>
   <button mat-raised-button (click)="process()">
-      <mat-icon>schedule</mat-icon> Processar
-    </button>
+    <mat-icon>schedule</mat-icon> Processar
+  </button>
 </mat-toolbar>

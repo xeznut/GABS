@@ -189,11 +189,12 @@ export class LockListComponent implements OnInit {
         siteData = data;
         historyData = '';
         break;
-        case 'history':
+      case 'history':
         colsToShow = [
           'action',
           'who',
-          'datetime'
+          'datetime',
+          'detail'
         ];
         siteData = '';
         historyData = data;
@@ -201,7 +202,7 @@ export class LockListComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(AppDialogComponent, {
-      data: { sites: siteData, history: historyData, colsToShow: colsToShow }
+      data: { sites: siteData, history: historyData, detail: '', colsToShow: colsToShow }
     });
     dialogRef.afterClosed().subscribe(result => {
     });

@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class LockFormComponent implements OnInit {
   lockSite: LockSite = new LockSite();
   status = this.enumSelector(eStatus);
+  entityCodes = this.enumSelector(eEntityCodes);
   constructor() { }
 
   ngOnInit() {
@@ -48,6 +49,11 @@ export class LockFormComponent implements OnInit {
   getStatus(val): string {
     return eStatus[val];
   }
+
+  getEntity(val): string {
+    return eEntityCodes[val];
+  }
+
   enumSelector(definition) {
     return Object.keys(definition)
       .filter(f => !isNaN(Number(f)));
@@ -82,4 +88,11 @@ enum eStatus {
   Inactivo = 2,
   Inserido = 3,
   Rejeitado = 4
+}
+
+enum eEntityCodes {
+  IGAC = 1,
+  PJ = 2,
+  MP = 3,
+  SRIJ = 4
 }
