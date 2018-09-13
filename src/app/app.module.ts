@@ -56,6 +56,7 @@ import { LockListComponent } from './lock-list/lock-list.component';
 import { LockFormComponent } from './lock-form/lock-form.component';
 import { AppDialogComponent } from './shared/ui/app-dialog.component';
 import { MatPaginatorIntlCro } from './shared/ui/matPaginatorIntlCroClass';
+import { WhiteListComponent } from './white-list/white-list.component';
 
 export function initConfig(config: AppSettings) { return () => config.load(); }
 
@@ -68,6 +69,7 @@ export function initConfig(config: AppSettings) { return () => config.load(); }
     LockListComponent,
     LockFormComponent,
     AppDialogComponent,
+    WhiteListComponent,
   ],
   entryComponents: [AppDialogComponent],
   imports: [
