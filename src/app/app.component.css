@@ -1,10 +1,27 @@
-.demo-tab-group {
-    border: 1px solid #e8e8e8;
-  }
-  
-  .demo-tab-content {
-    padding: 16px;
-  }
-  .demo-tab-group mat-label {
-    font-size: 24px;
-  }
+.tab-group {
+  border: 1px solid #e8e8e8;
+}
+
+.tab-content {
+  padding: 10px;
+}
+
+.tab-group mat-label {
+  font-size: 24px;
+}
+
+.appTitle {
+  height: 45px;
+  font-size: 28px;
+  font-weight: 600;
+  vertical-align: top;
+  display: table-cell;
+  position: relative;
+  padding-top: 6px;
+  padding-left: 50px;
+  width: 100%;
+}
+
+.mainHeader {
+  padding-left: 30px;
+}

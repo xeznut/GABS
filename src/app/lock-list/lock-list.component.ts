@@ -1,25 +1,20 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog, MatPaginator, MatTableDataSource } from '@angular/material';
 import { AppDialogComponent } from '../shared/ui/app-dialog.component';
-
-enum eStatus {
-  Activo = 1,
-  Inactivo = 2,
-  Inserido = 3,
-  Rejeitado = 4
-}
-
-enum eEntityCodes {
-  IGAC = 1,
-  PJ = 2,
-  MP = 3,
-  SRIJ = 4
-}
+import {
+  eStatus, eEntityCodes, eBlockTypes, eSiteStatus, eRequestTypes,
+  EnumUtils
+} from '../shared/enums';
 
 export class Site {
-  siteuri: string;
-  siteip: string;
-  siteurl: string;
+  siteId: string;
+  contentOwner: string;
+  uRI: string;
+  detectionDate: string;
+  blockType: eBlockTypes;
+  validFrom: string;
+  validTo: string;
+  siteStatus: eSiteStatus;
 }
 
 export class HistoryAction {
@@ -29,98 +24,172 @@ export class HistoryAction {
   detail?: string;
 }
 
-export class LockSite {
-  originId: number;
+export class SiteBlock {
   requestId: number;
+  entityReference: string;
   entityCode: eEntityCodes;
-  requestdate: string;
-  contentOwner: string;
+  requestDate: string;
+  requestType: eRequestTypes;
+  status: eStatus;
   sites: Site[];
-  detectionDate: string;
-  validFrom: string;
-  validTo: string;
-  lockStatus: eStatus;
+  notes?: string;
   history: HistoryAction[];
 }
 
-const ELEMENT_DATA: LockSite[] = [
+const xmlString = '<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n' +
+  '<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ' +
+  'xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n' +
+  '<soap:Body>\r\n' +
+  '<WSRequestSiteBlock xmlns=\"http://www.telecom.pt/Altice/ABS/WebServices\">\r\n' +
+  '<msgHdr>\r\n' +
+  '<sender>string</sender>\r\n' +
+  '<receiver>string</receiver> \r\n' +
+  '<senderDate>string</senderDate>\r\n' +
+  '<senderIDMsg>string</senderIDMsg>\r\n' +
+  '<receiverIDMsg>string</receiverIDMsg>\r\n' +
+  '<correlationID>string</correlationID>\r\n' +
+  '<senderKey>string</senderKey>\r\n' +
+  '<receiverKey>string</receiverKey>\r\n' +
+  '</msgHdr>\r\n' +
+  '<msgBody>\r\n' +
+  '<requestInfo>\r\n' +
+  '<entCode>string</entCode>\r\n' +
+  '<entReference>string</entReference>\r\n' +
+  '<requestType>string</requestType>\r\n' +
+  '<element>\r\n' +
+  '<elementID>string</elementID>\r\n' +
+  '<contentOwner>string</contentOwner>\r\n' +
+  '<uRI>string</uRI>\r\n' +
+  '<detectionDate>string</detectionDate>\r\n' +
+  '<blockType>string</blockType>\r\n' +
+  '<validFrom>string</validForm>\r\n' +
+  '<validTo>string</validTo>\r\n' +
+  '</element>\r\n' +
+  '</requestInfo>\r\n' +
+  '<notes>string</notes>\r\n' +
+  '</msgBody>\r\n' +
+  '</WSRequestSiteBlock>\r\n' +
+  '</soap:Body>\r\n' +
+  '</soap:Envelope>';
+
+const ELEMENT_DATA: SiteBlock[] = [
   {
-    originId: 1, requestId: 1, requestdate: '07-09-2018 21:43', contentOwner: 'pmiguel', entityCode: eEntityCodes.IGAC,
-    sites: [{ siteuri: '', siteip: '196.43.23.05', siteurl: '' }, {
-      siteuri: 'http://www.oni.pt', siteip: '196.43.23.06',
-      siteurl: 'http://www.oni.pt'
+    requestId: 1, entityReference: 'REF-001', entityCode: eEntityCodes.IGAC,
+    requestDate: '2018-09-07 21:43', requestType: eRequestTypes.Block, status: eStatus.Aceite,
+    sites: [{
+      siteId: '0001', contentOwner: 'SportTV', uRI: 'http://www.oni.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 3, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    },
+    {
+      siteId: '0002', contentOwner: 'SportTV', uRI: 'http://www.nowo.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 4, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
     }],
-    detectionDate: '07-09-2018 18:35', validFrom: '08-09-2018 19:45', validTo: '10-09-2018 10:32', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação', detail: 'xmlRequest' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
+      { datetime: '2018-09-09 21:34', who: 'pmiguel', action: 'Criação', detail: xmlString },
+      { datetime: '2018-09-09 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '2018-09-09 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
     ],
   },
   {
-    originId: 2, requestId: 2, requestdate: '07-09-2018 18:12', contentOwner: 'pmiguel', entityCode: eEntityCodes.PJ,
-    sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
-    detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
-    history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
-    ],
-  },
-  {
-    originId: 3, requestId: 3, requestdate: '07-09-2018 18:12', contentOwner: 'pmiguel', entityCode: eEntityCodes.MP,
-    sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
-    detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
-    history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
-    ],
-  },
-  {
-    originId: 4, requestId: 4, requestdate: '07-09-2018 18:12', contentOwner: 'pmiguel', entityCode: eEntityCodes.MP,
-    sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
-    detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
-    history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
-    ],
-  },
-  {
-    originId: 5, requestId: 5, requestdate: '07-09-2018 18:12', contentOwner: 'pmiguel', entityCode: eEntityCodes.IGAC,
-    sites: [{ siteuri: '', siteip: '196.43.23.65', siteurl: '' }],
-    detectionDate: '07-09-2018 09:45', validFrom: '08-09-2018 05:23', validTo: '10-09-2018 12:00', lockStatus: eStatus.Activo,
-    history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
-    ],
-  },
-  {
-    originId: 6, requestId: 6, requestdate: '07-09-2018 21:43', contentOwner: 'pmiguel', entityCode: eEntityCodes.SRIJ,
-    sites: [{ siteuri: '', siteip: '196.43.23.05', siteurl: '' }, {
-      siteuri: 'http://www.oni.pt', siteip: '196.43.23.06',
-      siteurl: 'http://www.oni.pt'
+    requestId: 2, entityReference: 'REF-002', entityCode: eEntityCodes.IGAC,
+    requestDate: '2018-09-07 21:43', requestType: eRequestTypes.Block, status: eStatus.Aceite,
+    sites: [{
+      siteId: '0001', contentOwner: 'SportTV', uRI: 'http://www.oni.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 2, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    },
+    {
+      siteId: '0002', contentOwner: 'SportTV', uRI: 'http://www.nowo.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 1, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
     }],
-    detectionDate: '07-09-2018 18:35', validFrom: '08-09-2018 19:45', validTo: '10-09-2018 10:32', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
+      { datetime: '2018-09-09 21:34', who: 'pmiguel', action: 'Criação', detail: xmlString },
+      { datetime: '2018-09-09 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '2018-09-09 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
     ],
   },
   {
-    originId: 7, requestId: 7, requestdate: '07-09-2018 21:43', contentOwner: 'pmiguel', entityCode: eEntityCodes.MP,
-    sites: [{ siteuri: '', siteip: '196.43.23.05', siteurl: '' }, {
-      siteuri: 'http://www.oni.pt', siteip: '196.43.23.06',
-      siteurl: 'http://www.oni.pt'
+    requestId: 3, entityReference: 'REF-003', entityCode: eEntityCodes.IGAC,
+    requestDate: '2018-09-07 21:43', requestType: eRequestTypes.Block, status: eStatus.Aceite,
+    sites: [{
+      siteId: '0001', contentOwner: 'SportTV', uRI: 'http://www.oni.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 2, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    },
+    {
+      siteId: '0002', contentOwner: 'SportTV', uRI: 'http://www.nowo.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 1, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
     }],
-    detectionDate: '07-09-2018 18:35', validFrom: '08-09-2018 19:45', validTo: '10-09-2018 10:32', lockStatus: eStatus.Activo,
     history: [
-      { datetime: '09-09-2018 21:34', who: 'pmiguel', action: 'Criação' },
-      { datetime: '09-09-2018 21:40', who: 'pmiguel', action: 'Processamento' },
-      { datetime: '09-09-2018 21:45', who: 'pmiguel', action: 'Activação' },
+      { datetime: '2018-09-09 21:34', who: 'pmiguel', action: 'Criação', detail: xmlString },
+      { datetime: '2018-09-09 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '2018-09-09 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
+    ],
+  },
+  {
+    requestId: 4, entityReference: 'REF-004', entityCode: eEntityCodes.IGAC,
+    requestDate: '2018-09-07 21:43', requestType: eRequestTypes.Block, status: eStatus.Aceite,
+    sites: [{
+      siteId: '0001', contentOwner: 'SportTV', uRI: 'http://www.oni.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 3, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    },
+    {
+      siteId: '0002', contentOwner: 'SportTV', uRI: 'http://www.nowo.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 1, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    }],
+    history: [
+      { datetime: '2018-09-09 21:34', who: 'pmiguel', action: 'Criação', detail: xmlString },
+      { datetime: '2018-09-09 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '2018-09-09 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
+    ],
+  },
+  {
+    requestId: 5, entityReference: 'REF-005', entityCode: eEntityCodes.IGAC,
+    requestDate: '2018-09-07 21:43', requestType: eRequestTypes.Block, status: eStatus.Aceite,
+    sites: [{
+      siteId: '0001', contentOwner: 'SportTV', uRI: 'http://www.oni.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 2, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    },
+    {
+      siteId: '0002', contentOwner: 'SportTV', uRI: 'http://www.nowo.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 1, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    }],
+    history: [
+      { datetime: '2018-09-09 21:34', who: 'pmiguel', action: 'Criação', detail: xmlString },
+      { datetime: '2018-09-09 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '2018-09-09 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
+    ],
+  },
+  {
+    requestId: 6, entityReference: 'REF-006', entityCode: eEntityCodes.IGAC,
+    requestDate: '2018-09-07 21:43', requestType: eRequestTypes.Block, status: eStatus.Aceite,
+    sites: [{
+      siteId: '0001', contentOwner: 'SportTV', uRI: 'http://www.oni.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 3, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    },
+    {
+      siteId: '0002', contentOwner: 'SportTV', uRI: 'http://www.nowo.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 1, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    }],
+    history: [
+      { datetime: '2018-09-09 21:34', who: 'pmiguel', action: 'Criação', detail: xmlString },
+      { datetime: '2018-09-09 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '2018-09-09 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
+    ],
+  },
+  {
+    requestId: 7, entityReference: 'REF-007', entityCode: eEntityCodes.IGAC,
+    requestDate: '2018-09-07 21:43', requestType: eRequestTypes.Block, status: eStatus.Aceite,
+    sites: [{
+      siteId: '0001', contentOwner: 'SportTV', uRI: 'http://www.oni.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 3, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    },
+    {
+      siteId: '0002', contentOwner: 'SportTV', uRI: 'http://www.nowo.pt', detectionDate: '2018-09-07 18:35',
+      blockType: 2, validFrom: '2018-09-08 19:45', validTo: '2018-09-10 10:32', siteStatus: eSiteStatus.Blocked,
+    }],
+    history: [
+      { datetime: '2018-09-09 21:34', who: 'pmiguel', action: 'Criação', detail: xmlString },
+      { datetime: '2018-09-09 21:40', who: 'pmiguel', action: 'Processamento' },
+      { datetime: '2018-09-09 21:45', who: 'pmiguel', action: 'Activação', detail: 'delivered' },
     ],
   },
 ];
@@ -132,27 +201,24 @@ const ELEMENT_DATA: LockSite[] = [
 })
 export class LockListComponent implements OnInit {
   displayedColumns: string[] = [
-    'originId',
     'requestId',
-    'requestdate',
+    'entityReference',
     'entityCode',
-    'contentOwner',
+    'requestDate',
     'siteuri',
-    'siteip',
-    'siteurl',
     'viewMore',
-    'detectionDate',
-    'validFrom',
-    'validTo',
-    'lockStatus',
+    'requestType',
+    'status',
     'history'
   ];
 
-  status = this.enumSelector(eStatus);
+  status = this.enumUtils.enumSelector(eStatus);
 
-  entityCodes = this.enumSelector(eEntityCodes);
+  entityCodes = this.enumUtils.enumSelector(eEntityCodes);
 
-  dataSource = new MatTableDataSource<LockSite>(ELEMENT_DATA);
+  requestTypes = this.enumUtils.enumSelector(eRequestTypes);
+
+  dataSource = new MatTableDataSource<SiteBlock>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -160,20 +226,7 @@ export class LockListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getStatus(val): string {
-    return eStatus[val];
-  }
-
-  getEntity(val): string {
-    return eEntityCodes[val];
-  }
-
-  enumSelector(definition) {
-    return Object.keys(definition)
-      .filter(f => !isNaN(Number(f)));
-  }
-
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private enumUtils: EnumUtils) { }
 
   openDialog(data, dataType): void {
     let siteData: string;
@@ -182,9 +235,14 @@ export class LockListComponent implements OnInit {
     switch (dataType) {
       case 'sites':
         colsToShow = [
-          'siteuri',
-          'siteip',
-          'siteurl'
+          'siteId',
+          'contentOwner',
+          'uRI',
+          'detectionDate',
+          'blockType',
+          'validFrom',
+          'validTo',
+          'siteStatus',
         ];
         siteData = data;
         historyData = '';

@@ -1,5 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+import {
+  eStatus, eEntityCodes, eBlockTypes, eSiteStatus, eRequestTypes,
+  EnumUtils
+} from '../enums';
 
 @Component({
   selector: 'app-dialog',
@@ -11,7 +15,8 @@ export class AppDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AppDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private enumUtils: EnumUtils) {}
 
   onNoClick(): void {
     this.dialogRef.close();

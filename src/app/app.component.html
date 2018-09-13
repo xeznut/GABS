@@ -3,6 +3,9 @@
     <div class="logo">
         <img src="images/logoNowo.png" alt="logo">
     </div>
+    <div class="appTitle">
+        <span class="appTitle">Gestor de Automatização de pedidos de Bloqueio de Sites (GABS)</span>
+    </div>
 
     <div class="customerIDIcon">
         <mat-icon *ngIf="isClientContextualized">person</mat-icon>
@@ -12,33 +15,34 @@
         <span *ngIf="isClientContextualized">{{ subscriberNumber }}</span>
     </div>
 
-    <div class="appTitle">
-        <span class="appTitle">Gestor de Automatização de pedidos de Bloqueio de Sites (GABS)</span>
-    </div>
     <div class="logout" *ngIf="isLoggedIn">
-        <button title="LOGOUT" mat-raised-button (click)="logout()"><mat-icon>power_settings_new</mat-icon> {{username}}</button>
+        <button title="LOGOUT" mat-raised-button (click)="logout()">
+            <mat-icon>power_settings_new</mat-icon> {{username}}
+        </button>
     </div>
 </div>
 <app-loading class="spinner"></app-loading>
-<mat-tab-group class="demo-tab-group" [(selectedIndex)]="selectedTab">
-    <mat-tab>
-        <ng-template mat-tab-label>
-            <mat-icon>list</mat-icon>&nbsp;
-            <mat-label>Lista de Locks</mat-label>
-        </ng-template>
-        <div class="demo-tab-content">
-            <app-lock-list></app-lock-list>
-        </div>
-    </mat-tab>
-    <mat-tab>
-        <ng-template mat-tab-label>
-            <mat-icon>input</mat-icon>&nbsp;
-            <mat-label>Novo Lock</mat-label>
-        </ng-template>
-        <div class="demo-tab-content">
-            <app-lock-form></app-lock-form>
-        </div>
-    </mat-tab>
-    
-</mat-tab-group>
+<div>
+    <mat-tab-group class="tab-group" [(selectedIndex)]="selectedTab">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>list</mat-icon>&nbsp;
+                <mat-label>Lista pedidos</mat-label>
+            </ng-template>
+            <div class="tab-content">
+                <app-lock-list></app-lock-list>
+            </div>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>input</mat-icon>&nbsp;
+                <mat-label>Detalhe pedido</mat-label>
+            </ng-template>
+            <div class="tab-content">
+                <app-lock-form></app-lock-form>
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+</div>
 <app-login-component *ngIf="askLogin"></app-login-component>

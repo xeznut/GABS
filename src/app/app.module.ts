@@ -10,6 +10,7 @@ import { AppSettings } from './app.settings';
 import { LoadingService } from './shared/loading.service';
 
 import { LoginComponent } from './other/login.component';
+import { EnumUtils } from './shared/enums';
 
 import { routingImports } from './app.routes';
 
@@ -144,7 +145,9 @@ export function initConfig(config: AppSettings) { return () => config.load(); }
     MatTooltipModule,
   ],
   providers: [
-    LoadingService, { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCro}
+    EnumUtils,
+    LoadingService,
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCro}
   ],
   bootstrap: [AppComponent]
 })

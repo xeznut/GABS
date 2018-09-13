@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  eStatus, eEntityCodes, eBlockTypes, eSiteStatus, eRequestTypes,
+  EnumUtils
+} from '../shared/enums';
 
 @Component({
   selector: 'app-lock-form',
@@ -7,31 +11,36 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LockFormComponent implements OnInit {
-  lockSite: LockSite = new LockSite();
-  status = this.enumSelector(eStatus);
-  entityCodes = this.enumSelector(eEntityCodes);
-  constructor() { }
+  SiteBlock: SiteBlock = new SiteBlock();
+  status = this.enumUtils.enumSelector(eStatus);
+  entityCodes = this.enumUtils.enumSelector(eEntityCodes);
+  requestTypes = this.enumUtils.enumSelector(eRequestTypes);
+  siteStatus = this.enumUtils.enumSelector(eSiteStatus);
+  blockTypes = this.enumUtils.enumSelector(eBlockTypes);
+
+  constructor(private enumUtils: EnumUtils) { }
 
   ngOnInit() {
-    this.lockSite.sites = [];
+    this.SiteBlock.sites = [];
     const s = {} as Site;
-    s.siteuri = 'http://somesite.com';
-    s.siteip = '193.235.12.5';
-    s.siteurl = '';
-    this.lockSite.sites.push(s);
+    s.uRI = 'http://somesite.com';
+    s.siteId = '1';
+    s.contentOwner = 'SportTV';
+    s.detectionDate = '2018-09-08T15:43:00';
+    s.blockType = 3;
+    s.validFrom = '2018-09-10T13:45';
+    s.validTo = '2018-09-11T13:45';
+    s.siteStatus = eSiteStatus.Blocked,
+    this.SiteBlock.sites.push(s);
     const s2 = {} as Site;
-    s2.siteuri = '';
-    s2.siteip = '';
-    s2.siteurl = '';
-    this.lockSite.sites.push(s2);
+    s2.uRI = '';
+    this.SiteBlock.sites.push(s2);
 
-    this.lockSite.files = [];
+    this.SiteBlock.files = [];
     const f = {} as File;
     f.file = 'DocMuitoBom.docx';
-    this.lockSite.files.push(f);
-    const f2 = {} as File;
-    f2.file = '';
-    this.lockSite.files.push(f2);
+    f.date = '2018-09-09T13:54';
+    this.SiteBlock.files.push(f);
   }
 
   add(): string {
@@ -45,54 +54,37 @@ export class LockFormComponent implements OnInit {
   delete(): string {
     return '';
   }
-
-  getStatus(val): string {
-    return eStatus[val];
-  }
-
-  getEntity(val): string {
-    return eEntityCodes[val];
-  }
-
-  enumSelector(definition) {
-    return Object.keys(definition)
-      .filter(f => !isNaN(Number(f)));
-  }
 }
 
 export class Site {
-  siteuri: string;
-  siteip: string;
-  siteurl: string;
-}
-
-export class File {
-  file: string;
-}
-
-export class LockSite {
-  originId: number;
-  requestId: number;
-  requestdate: string;
+  siteId: string;
   contentOwner: string;
-  sites: Site[];
+  uRI: string;
   detectionDate: string;
+  blockType: eBlockTypes;
   validFrom: string;
   validTo: string;
-  lockStatus: eStatus;
-  files: File[];
+  siteStatus: eSiteStatus;
 }
-
-enum eStatus {
-  Activo = 1,
-  Inactivo = 2,
-  Inserido = 3,
-  Rejeitado = 4
+export class HistoryAction {
+  datetime: string;
+  who: string;
+  action: string;
+  detail?: string;
 }
-
-enum eEntityCodes {
-  IGAC = 1,
-  PJ = 2,
-  MP = 3,
-  SRIJ = 4
+export class SiteBlock {
+  requestId: number;
+  entityReference: string;
+  entityCode: eEntityCodes;
+  requestDate: string;
+  requestType: eRequestTypes;
+  status: eStatus;
+  sites: Site[];
+  notes?: string;
+  history?: HistoryAction[];
+  files?: File[];
+}
+export class File {
+  file: string;
+  date: string;
 }

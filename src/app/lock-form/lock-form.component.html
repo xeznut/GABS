@@ -1,79 +1,107 @@
-<mat-grid-list cols="5" rowHeight="5:1">
+<mat-grid-list cols="6" rowHeight="4:1">
   <mat-grid-tile>
     <mat-form-field>
-      <input type="number" matInput placeholder="Entidade requisitante" [(ngModel)]="lockSite.originId">
+      <input type="number" matInput placeholder="ID" [(ngModel)]="SiteBlock.requestId">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="number" matInput placeholder="Referência/Processo do pedido" [(ngModel)]="lockSite.requestId">
+      <input type="string" matInput placeholder="Referência/Processo do pedido" [(ngModel)]="SiteBlock.entityReference">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data do pedido" [(ngModel)]="lockSite.requestDate">
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-form-field>
-      <mat-select placeholder="Entidade" [(ngModel)]="lockSite.entity">
-        <mat-option *ngFor="let entity of entityCodes" [value]="entity">
-          {{getEntity(entity)}}
+      <mat-select placeholder="Entidade" [(ngModel)]="SiteBlock.entityCode">
+        <mat-option *ngFor="let entity of entityCodes" [value]="entity.value">
+          {{entity.title}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="Titular dos direitos" [(ngModel)]="lockSite.contentOwner">
+      <input type="datetime-local" matInput placeholder="Data do pedido" [(ngModel)]="SiteBlock.requestDate">
     </mat-form-field>
   </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
+      <mat-select placeholder="Tipo de pedido" [(ngModel)]="SiteBlock.requestType">
+        <mat-option *ngFor="let rType of requestTypes" [value]="rType.value">
+          {{rType.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+
 </mat-grid-list>
-<mat-grid-list cols="5" rowHeight="5:1">
+<mat-grid-list cols="6" rowHeight="4:1">
   <mat-grid-tile>
     <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data da Detecção" [(ngModel)]="lockSite.detectionDate">
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data de Inicio do Bloqueio" [(ngModel)]="lockSite.validFrom">
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data de Fim do Bloqueio" [(ngModel)]="lockSite.validTo">
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-form-field>
-      <mat-select placeholder="Estado do Registo" [(ngModel)]="lockSite.lockStatus">
-        <mat-option *ngFor="let state of status" [value]="state">
-          {{getStatus(state)}}
+      <mat-select placeholder="Estado do Registo" [(ngModel)]="SiteBlock.status">
+        <mat-option *ngFor="let state of status" [value]="state.value">
+          {{state.title}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </mat-grid-tile>
 </mat-grid-list>
 <h2>Sites</h2>
-<mat-grid-list cols="5" *ngFor="let site of lockSite.sites; let i = index" rowHeight="5:1">
+<mat-grid-list cols="6" *ngFor="let site of SiteBlock.sites; let i = index" rowHeight="2:1">
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="Site URI" [(ngModel)]="lockSite.sites[i].siteuri">
+      <input type="text" matInput placeholder="ID" [(ngModel)]="SiteBlock.sites[i].siteId">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="Site IP" [(ngModel)]="lockSite.sites[i].siteip">
+      <input type="text" matInput placeholder="Titular dos direitos" [(ngModel)]="SiteBlock.sites[i].contentOwner">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="Site URL" [(ngModel)]="lockSite.sites[i].siteurl">
+      <input type="text" matInput placeholder="Site URI" [(ngModel)]="SiteBlock.sites[i].uRI">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
-    <span *ngIf="i == lockSite.sites.length-1">
+    <mat-form-field>
+      <input type="datetime-local" matInput placeholder="Data da Detecção" [(ngModel)]="SiteBlock.sites[i].detectionDate">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <mat-form-field>
+        <mat-select placeholder="Tipo de Bloqueio" [(ngModel)]="SiteBlock.sites[i].blockType">
+          <mat-option *ngFor="let bType of blockTypes" [value]="bType.value">
+            {{bType.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
+      <input type="datetime-local" matInput placeholder="Data de Inicio do Bloqueio" [(ngModel)]="SiteBlock.sites[i].validFrom">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
+      <input type="datetime-local" matInput placeholder="Data de Fim do Bloqueio" [(ngModel)]="SiteBlock.sites[i].validTo">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field>
+      <mat-select placeholder="Estado do Site" [(ngModel)]="SiteBlock.sites[i].siteStatus">
+        <mat-option *ngFor="let state of siteStatus" [value]="state.value">
+          {{state.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <span *ngIf="i < SiteBlock.sites.length-1">
+      <button mat-raised-button (click)="add()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </span>
+    <span *ngIf="i == SiteBlock.sites.length-1">
       <button mat-raised-button (click)="add()">
         <mat-icon>add</mat-icon>
       </button>
@@ -81,12 +109,22 @@
   </mat-grid-tile>
 </mat-grid-list>
 <h2>Files</h2>
-<mat-grid-list cols="5" *ngFor="let file of lockSite.files; let i = index" rowHeight="5:1">
+<mat-grid-list cols="6" *ngFor="let file of SiteBlock.files; let i = index" rowHeight="4:1">
   <mat-grid-tile>
-    <a href="#">{{lockSite.files[i].file}}</a>
+    <a href="#">{{SiteBlock.files[i].file}}</a>
   </mat-grid-tile>
   <mat-grid-tile>
-    <span *ngIf="i == lockSite.files.length-1">
+    {{SiteBlock.files[i].date | date:'dd-MM-yyyy HH:mm'}}
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <span *ngIf="i <= SiteBlock.files.length-1">
+      <button mat-raised-button (click)="add()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </span>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <span *ngIf="i == SiteBlock.files.length-1">
       <button mat-raised-button (click)="add()">
         <mat-icon>attachment</mat-icon>Anexar ficheiro
       </button>
@@ -103,5 +141,8 @@
   </button>
   <button mat-raised-button (click)="process()">
     <mat-icon>schedule</mat-icon> Processar
+  </button>
+  <button mat-raised-button (click)="process()">
+    <mat-icon>stop</mat-icon> Cancelar
   </button>
 </mat-toolbar>

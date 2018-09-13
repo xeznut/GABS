@@ -3,121 +3,84 @@
     <tr>
       <td>
         <mat-form-field style="width: 30px;">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ent.">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ID">
         </mat-form-field>
       </td>
       <td>
-        <mat-form-field style="width: 50px;">
+        <mat-form-field style="width: 100px;">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ref.">
         </mat-form-field>
       </td>
       <td>
-        <mat-form-field style="width: 135px">
-          <input type="date" matInput placeholder="Data do pedido">
-        </mat-form-field>
-      </td>
-      <td>
         <mat-form-field style="width: 80px">
-          <mat-select placeholder="Entidade">
-            <mat-option *ngFor="let entity of entityCodes" [value]="entity">
-              {{getEntity(entity)}}
+            <mat-select placeholder="Entidade">
+                <mat-option *ngFor="let entity of entityCodes" [value]="entity.value">
+                  {{entity.title}}
+                </mat-option>
+              </mat-select>
+          
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 135px">
+            <input type="date" matInput placeholder="Data do pedido">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 200px;">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="URI">
+        </mat-form-field>
+      </td>
+      <td>
+        <span style="min-width: 30px;display: block;">&nbsp;</span>
+      </td>
+      <td>
+        <mat-form-field style="width: 100px">
+          <mat-select placeholder="Tipo de pedido">
+            <mat-option *ngFor="let rType of requestTypes" [value]="rType.value">
+              {{rType.title}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </td>
       <td>
-        <mat-form-field style="width: 120px;">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Titular dos direitos">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field style="width: 120px;">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Site URI">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field style="width: 120px;">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Site IP">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field style="width: 120px;">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Site URL">
-        </mat-form-field>
-      </td>
-      <td>
-        <span style="min-width: 15px;display: block;">&nbsp;</span>
-      </td>
-      <td>
-        <mat-form-field style="width: 135px">
-          <input type="date" matInput placeholder="Data da detecção">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field style="width: 135px">
-          <input type="date" matInput placeholder="Ínicio do bloqueio">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field style="width: 135px">
-          <input type="date" matInput placeholder="Fim do bloqueio">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field style="width: 50px">
-          <mat-select placeholder="Estado">
-            <mat-option *ngFor="let state of status" [value]="state">
-              {{getStatus(state)}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-        <span style="min-width: 15px;display: block;">&nbsp;</span>
-      </td>
+          <mat-form-field style="width: 80px">
+            <mat-select placeholder="Estado">
+              <mat-option *ngFor="let state of status" [value]="state.value">
+                {{state.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+  
     </tr>
   </table>
 
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="originId">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 30px"> Ent. </th>
-    <td mat-cell *matCellDef="let element"> {{element.originId}} </td>
-  </ng-container>
-
   <ng-container matColumnDef="requestId">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 50px"> Ref. </th>
+    <th mat-header-cell *matHeaderCellDef style="min-width: 30px"> ID </th>
     <td mat-cell *matCellDef="let element"> {{element.requestId}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="requestdate">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 135px"> Data do pedido </th>
-    <td mat-cell *matCellDef="let element"> {{element.requestdate}} </td>
+  <ng-container matColumnDef="entityReference">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 100px"> Ref. </th>
+    <td mat-cell *matCellDef="let element"> {{element.entityReference}} </td>
   </ng-container>
 
   <ng-container matColumnDef="entityCode">
     <th mat-header-cell *matHeaderCellDef style="min-width: 80px"> Entidade </th>
-    <td mat-cell *matCellDef="let element"> {{getEntity(element.entityCode)}} </td>
+    <td mat-cell *matCellDef="let element"> {{enumUtils.getEntity(element.entityCode)}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="contentOwner">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 120px"> Titular dos direitos </th>
-    <td mat-cell *matCellDef="let element"> {{element.contentOwner}} </td>
+  <ng-container matColumnDef="requestDate">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 135px"> Data do pedido </th>
+    <td mat-cell *matCellDef="let element"> {{element.requestDate | date:'dd-MM-yyyy HH:mm'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="siteuri">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 120px"> Site URI </th>
-    <td mat-cell *matCellDef="let element"> {{element.sites[0].siteuri}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="siteip">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 120px"> Site IP </th>
-    <td mat-cell *matCellDef="let element"> {{element.sites[0].siteip}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="siteurl">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 120px"> Site URL </th>
-    <td mat-cell *matCellDef="let element"> {{element.sites[0].siteurl}} </td>
+    <th mat-header-cell *matHeaderCellDef style="min-width: 200px"> URI </th>
+    <td mat-cell *matCellDef="let element"> {{element.sites[0].uRI}} </td>
   </ng-container>
 
   <ng-container matColumnDef="viewMore">
@@ -131,29 +94,20 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="detectionDate">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 135px"> Data da detecção </th>
-    <td mat-cell *matCellDef="let element"> {{element.detectionDate}} </td>
+  <ng-container matColumnDef="requestType">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 100px"> Tipo de pedido </th>
+    <td mat-cell *matCellDef="let element"> {{enumUtils.getRequestType(element.requestType)}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="validFrom">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 135px"> Ínicio do bloqueio </th>
-    <td mat-cell *matCellDef="let element"> {{element.validFrom}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="validTo">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 135px"> Fim do bloqueio </th>
-    <td mat-cell *matCellDef="let element"> {{element.validTo}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="lockStatus">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 50px"> Estado </th>
-    <td mat-cell *matCellDef="let element"> {{getStatus(element.lockStatus)}}</td>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 100px">Estado</th>
+    <td mat-cell *matCellDef="let element"> {{enumUtils.getState(element.status)}} </td>
   </ng-container>
 
   <ng-container matColumnDef="history">
-    <th mat-header-cell *matHeaderCellDef style="min-width: 10px"></th>
+    <th mat-header-cell *matHeaderCellDef style="min-width: 100px">Data do Estado</th>
     <td mat-cell *matCellDef="let element">
+      {{element.history[0].datetime | date:'dd-MM-yyyy HH:mm'}}
       <button mat-button (click)="openDialog(element.history, 'history')">
         <mat-icon>history</mat-icon>
       </button>

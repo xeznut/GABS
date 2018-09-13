@@ -1,17 +1,47 @@
+<div style="float: right; cursor: pointer;">
+    <span (click)="this.dialogRef.close();">
+        <mat-icon>close</mat-icon>
+    </span>
+</div>
 <table mat-table [dataSource]="data.sites" class="mat-elevation-z8" *ngIf="data.sites != ''">
-    <ng-container matColumnDef="siteuri">
+    <ng-container matColumnDef="siteId">
+        <th mat-header-cell *matHeaderCellDef> Site Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.siteId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contentOwner">
+        <th mat-header-cell *matHeaderCellDef> Titular dos direitos </th>
+        <td mat-cell *matCellDef="let element"> {{element.contentOwner}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="uRI">
         <th mat-header-cell *matHeaderCellDef> Site URI </th>
-        <td mat-cell *matCellDef="let element"> {{element.siteuri}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.uRI}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="siteip">
-        <th mat-header-cell *matHeaderCellDef> Site IP </th>
-        <td mat-cell *matCellDef="let element"> {{element.siteip}} </td>
+    <ng-container matColumnDef="detectionDate">
+        <th mat-header-cell *matHeaderCellDef> Data da detecção </th>
+        <td mat-cell *matCellDef="let element"> {{element.detectionDate | date:'dd-MM-yyyy HH:mm'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="siteurl">
-        <th mat-header-cell *matHeaderCellDef> Site URL </th>
-        <td mat-cell *matCellDef="let element"> {{element.siteurl}} </td>
+    <ng-container matColumnDef="blockType">
+        <th mat-header-cell *matHeaderCellDef> Tipo de bloqueio </th>
+        <td mat-cell *matCellDef="let element"> {{enumUtils.getBlockType(element.blockType)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="validFrom">
+        <th mat-header-cell *matHeaderCellDef> Ínicio do bloqueio </th>
+        <td mat-cell *matCellDef="let element"> {{element.validFrom | date:'dd-MM-yyyy HH:mm'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="validTo">
+        <th mat-header-cell *matHeaderCellDef> Fim do bloqueio </th>
+        <td mat-cell *matCellDef="let element"> {{element.validTo | date:'dd-MM-yyyy HH:mm'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="siteStatus">
+        <th mat-header-cell *matHeaderCellDef> Estado do Site </th>
+        <td mat-cell *matCellDef="let element"> {{enumUtils.getSiteState(element.siteStatus)}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="data.colsToShow"></tr>
@@ -28,7 +58,7 @@
     </ng-container>
     <ng-container matColumnDef="datetime">
         <th mat-header-cell *matHeaderCellDef> Data </th>
-        <td mat-cell *matCellDef="let element"> {{element.datetime}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.datetime | date:'dd-MM-yyyy HH:mm'}} </td>
     </ng-container>
     <ng-container matColumnDef="detail">
         <th mat-header-cell *matHeaderCellDef style="min-width: 10px"></th>
@@ -46,7 +76,9 @@
 <table mat-table [dataSource]="data.detail" class="mat-elevation-z8" *ngIf="data.detail != ''">
     <ng-container matColumnDef="detail">
         <th mat-header-cell *matHeaderCellDef> Detalhe </th>
-        <td mat-cell *matCellDef="let element"> {{element}} </td>
+        <td mat-cell *matCellDef="let element">
+            <div style="white-space: pre-wrap; font-size: smaller; max-height: 400px; overflow-y: auto;">{{element}}</div>
+        </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="data.colsToShow"></tr>
     <tr mat-row *matRowDef="let row; columns: data.colsToShow;"></tr>
