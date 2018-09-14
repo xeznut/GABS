@@ -23,7 +23,7 @@
 </div>
 <app-loading class="spinner"></app-loading>
 <div>
-    <mat-tab-group class="tab-group" [(selectedIndex)]="selectedTab">
+    <mat-tab-group class="tab-group" [(selectedIndex)]="selectedTab" #matgroup>
         <mat-tab>
             <ng-template mat-tab-label>
                 <mat-icon>list</mat-icon>&nbsp;
@@ -44,13 +44,23 @@
         </mat-tab>
         <mat-tab>
             <ng-template mat-tab-label>
-                <mat-icon>input</mat-icon>&nbsp;
-                <mat-label>Whitelist</mat-label>
+                <mat-icon>playlist_add_check</mat-icon>&nbsp;
+                <mat-label>Gestão Whitelist</mat-label>
             </ng-template>
             <div class="tab-content">
                 <app-white-list></app-white-list>
             </div>
         </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>block</mat-icon>&nbsp;
+                <mat-label>Gestão de Sites Bloqueados</mat-label>
+            </ng-template>
+            <div class="tab-content">
+                <app-lock-sites-list></app-lock-sites-list>
+            </div>
+        </mat-tab>
     </mat-tab-group>
+    <router-outlet></router-outlet>
 </div>
 <app-login-component *ngIf="askLogin"></app-login-component>

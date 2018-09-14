@@ -18,6 +18,17 @@ export class LockFormComponent implements OnInit {
   siteStatus = this.enumUtils.enumSelector(eSiteStatus);
   blockTypes = this.enumUtils.enumSelector(eBlockTypes);
 
+  afuConfig = {
+    uploadAPI: {
+      url: 'https://example-file-upload-api',
+    },
+    multiple: false,
+    formatsAllowed: '.docx,.pdf',
+    hideProgressBar: true,
+    hideResetBtn: true,
+    theme: 'attachPin '
+  };
+
   constructor(private enumUtils: EnumUtils) { }
 
   ngOnInit() {
@@ -31,7 +42,7 @@ export class LockFormComponent implements OnInit {
     s.validFrom = '2018-09-10T13:45';
     s.validTo = '2018-09-11T13:45';
     s.siteStatus = eSiteStatus.Blocked,
-    this.SiteBlock.sites.push(s);
+      this.SiteBlock.sites.push(s);
     const s2 = {} as Site;
     s2.uRI = '';
     this.SiteBlock.sites.push(s2);

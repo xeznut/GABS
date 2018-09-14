@@ -1,6 +1,6 @@
 import {MatPaginatorIntl} from '@angular/material';
 export class MatPaginatorIntlCro extends MatPaginatorIntl {
-  itemsPerPageLabel = 'Pedidos por página';
+  itemsPerPageLabel = 'Registos por página';
   nextPageLabel     = 'Próxima';
   previousPageLabel = 'Anterior';
   firstPageLabel = 'Primeira';

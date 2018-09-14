@@ -1,3 +1,134 @@
-<p>
-  white-list works!
-</p>
+<div id="searchDiv">
+  <table>
+    <tr>
+      <td>
+        <mat-form-field style="width: 30px;">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ID">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 200px;">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="URI">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 100px">
+          <mat-select placeholder="Tipo de site">
+            <mat-option *ngFor="let entity of wlTypes" [value]="entity.value">
+              {{entity.title}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 100px">
+          <mat-select placeholder="Estado">
+            <mat-option *ngFor="let entity of wlStatus" [value]="entity.value">
+              {{entity.title}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 150px">
+          <input type="date" matInput placeholder="Data de criação">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</div>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="whitelistId">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 30px"> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.whitelistId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="uRI">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 200px"> URI </th>
+    <td mat-cell *matCellDef="let element"> {{element.uRI}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="wlType">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 100px"> Tipo de site </th>
+    <td mat-cell *matCellDef="let element"> {{enumUtils.getWLType(element.wlType)}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="wlState">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 100px"> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{enumUtils.getWLState(element.wlState)}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createDate">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 150px"> Data de criação </th>
+    <td mat-cell *matCellDef="let element"> {{element.createDate | date:'dd-MM-yyyy HH:mm'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef style="min-width: 30px"></th>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="element.wlState == 1">
+        <button mat-button (click)="add()">
+          <mat-icon>toggle_off</mat-icon>
+        </button>
+      </span>
+      <span *ngIf="element.wlState == 2">
+        <button mat-button (click)="add()">
+          <mat-icon>toggle_on</mat-icon>
+        </button>
+      </span>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<h2>Novo registo</h2>
+<mat-card style="width: 615px;">
+  <table>
+    <tr>
+      <td>
+        <mat-form-field style="width: 30px;">
+          <input type="number" matInput placeholder="ID" [(ngModel)]="WLSite.whitelistId">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 200px;">
+          <input type="string" matInput placeholder="URI" [(ngModel)]="WLSite.uRI">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 100px;">
+          <mat-select placeholder="Tipo de site" [(ngModel)]="WLSite.eWLTypes">
+            <mat-option *ngFor="let entity of wlTypes" [value]="entity.value">
+              {{entity.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 100px;">
+          <mat-select placeholder="Estado" [(ngModel)]="WLSite.eWLStatus">
+            <mat-option *ngFor="let entity of wlStatus" [value]="entity.value">
+              {{entity.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field style="width: 150px;">
+          <input type="datetime-local" matInput placeholder="Data do pedido" [(ngModel)]="WLSite.requestDate">
+        </mat-form-field>
+      </td>
+      <td>
+        <button mat-button (click)="add()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</mat-card>
+<div id="pageDiv">
+  <mat-paginator [pageSizeOptions]="[5,10,50]" showFirstLastButtons></mat-paginator>
+</div>

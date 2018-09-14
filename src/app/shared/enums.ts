@@ -33,6 +33,16 @@ export enum eRequestTypes {
     Unblock = 2
 }
 
+export enum eWLTypes {
+    DNS = 1,
+    IP = 2
+}
+
+export enum eWLStatus {
+    'Activo' = 1,
+    'Não Activo' = 2
+}
+
 @Injectable()
 
 export class EnumUtils {
@@ -54,6 +64,14 @@ export class EnumUtils {
 
     getSiteState(val): string {
         return eSiteStatus[val];
+    }
+
+    getWLType(val): string {
+        return eWLTypes[val];
+    }
+
+    getWLState(val): string {
+        return eWLStatus[val];
     }
 
     enumSelector(definition) {

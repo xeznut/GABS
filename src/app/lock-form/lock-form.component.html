@@ -32,9 +32,6 @@
       </mat-select>
     </mat-form-field>
   </mat-grid-tile>
-
-</mat-grid-list>
-<mat-grid-list cols="6" rowHeight="4:1">
   <mat-grid-tile>
     <mat-form-field>
       <mat-select placeholder="Estado do Registo" [(ngModel)]="SiteBlock.status">
@@ -68,14 +65,14 @@
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
-      <mat-form-field>
-        <mat-select placeholder="Tipo de Bloqueio" [(ngModel)]="SiteBlock.sites[i].blockType">
-          <mat-option *ngFor="let bType of blockTypes" [value]="bType.value">
-            {{bType.title}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </mat-grid-tile>
+    <mat-form-field>
+      <mat-select placeholder="Tipo de Bloqueio" [(ngModel)]="SiteBlock.sites[i].blockType">
+        <mat-option *ngFor="let bType of blockTypes" [value]="bType.value">
+          {{bType.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
       <input type="datetime-local" matInput placeholder="Data de Inicio do Bloqueio" [(ngModel)]="SiteBlock.sites[i].validFrom">
@@ -97,12 +94,12 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <span *ngIf="i < SiteBlock.sites.length-1">
-      <button mat-raised-button (click)="add()">
+      <button mat-button (click)="add()">
         <mat-icon>delete</mat-icon>
       </button>
     </span>
     <span *ngIf="i == SiteBlock.sites.length-1">
-      <button mat-raised-button (click)="add()">
+      <button mat-button (click)="add()">
         <mat-icon>add</mat-icon>
       </button>
     </span>
@@ -118,20 +115,19 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <span *ngIf="i <= SiteBlock.files.length-1">
-      <button mat-raised-button (click)="add()">
+      <button mat-button (click)="add()">
         <mat-icon>delete</mat-icon>
       </button>
     </span>
   </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="6" *ngFor="let file of SiteBlock.files; let i = index" rowHeight="1:1">
   <mat-grid-tile>
     <span *ngIf="i == SiteBlock.files.length-1">
-      <button mat-raised-button (click)="add()">
-        <mat-icon>attachment</mat-icon>Anexar ficheiro
-      </button>
+      <angular-file-uploader [config]="afuConfig"></angular-file-uploader>
     </span>
   </mat-grid-tile>
 </mat-grid-list>
-
 <mat-toolbar>
   <button mat-raised-button (click)="delete()">
     <mat-icon>delete</mat-icon> Limpar

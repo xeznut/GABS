@@ -11,6 +11,7 @@ import { LoadingService } from './shared/loading.service';
 
 import { LoginComponent } from './other/login.component';
 import { EnumUtils } from './shared/enums';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 import { routingImports } from './app.routes';
 
@@ -57,6 +58,7 @@ import { LockFormComponent } from './lock-form/lock-form.component';
 import { AppDialogComponent } from './shared/ui/app-dialog.component';
 import { MatPaginatorIntlCro } from './shared/ui/matPaginatorIntlCroClass';
 import { WhiteListComponent } from './white-list/white-list.component';
+import { LockSitesListComponent } from './lock-sites-list/lock-sites-list.component';
 
 export function initConfig(config: AppSettings) { return () => config.load(); }
 
@@ -70,6 +72,7 @@ export function initConfig(config: AppSettings) { return () => config.load(); }
     LockFormComponent,
     AppDialogComponent,
     WhiteListComponent,
+    LockSitesListComponent,
   ],
   entryComponents: [AppDialogComponent],
   imports: [
@@ -110,7 +113,8 @@ export function initConfig(config: AppSettings) { return () => config.load(); }
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    AngularFileUploaderModule
   ],
   exports: [
     MatAutocompleteModule,

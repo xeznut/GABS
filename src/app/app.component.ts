@@ -9,6 +9,23 @@ import { skip } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Lock Management';
+  title = 'GABS';
   selectedTab = 0;
+  constructor(private router: Router) { }
+
+  goToListaPedidos() {
+    this.selectedTab = 0;
+  }
+
+  goToDetalhe() {
+    this.selectedTab = 1;
+  }
+
+  goToWhitelist() {
+    this.selectedTab = 2;
+  }
+
+  goToListaSitesBloqueados() {
+    this.selectedTab = 3;
+  }
 }
