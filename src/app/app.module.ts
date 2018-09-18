@@ -11,7 +11,9 @@ import { LoadingService } from './shared/loading.service';
 
 import { LoginComponent } from './other/login.component';
 import { EnumUtils } from './shared/enums';
+
 import { AngularFileUploaderModule } from 'angular-file-uploader';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 import { routingImports } from './app.routes';
 
@@ -73,6 +75,7 @@ export function initConfig(config: AppSettings) { return () => config.load(); }
     AppDialogComponent,
     WhiteListComponent,
     LockSitesListComponent,
+    FileSelectDirective
   ],
   entryComponents: [AppDialogComponent],
   imports: [

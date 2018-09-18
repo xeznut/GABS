@@ -1,17 +1,18 @@
-<mat-grid-list cols="6" rowHeight="4:1">
+<mat-grid-list cols="6" rowHeight="3:1">
   <mat-grid-tile>
     <mat-form-field>
-      <input type="number" matInput placeholder="ID" [(ngModel)]="SiteBlock.requestId">
+      <input type="number" matInput placeholder="ID" [(ngModel)]="SiteBlock.requestId" class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="string" matInput placeholder="Referência/Processo do pedido" [(ngModel)]="SiteBlock.entityReference">
+      <input type="string" matInput placeholder="Referência/Processo do pedido" [(ngModel)]="SiteBlock.entityReference"
+        class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <mat-select placeholder="Entidade" [(ngModel)]="SiteBlock.entityCode">
+      <mat-select placeholder="Entidade" [(ngModel)]="SiteBlock.entityCode" class="select">
         <mat-option *ngFor="let entity of entityCodes" [value]="entity.value">
           {{entity.title}}
         </mat-option>
@@ -20,12 +21,12 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data do pedido" [(ngModel)]="SiteBlock.requestDate">
+      <input type="datetime-local" matInput placeholder="Data do pedido" [(ngModel)]="SiteBlock.requestDate" class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <mat-select placeholder="Tipo de pedido" [(ngModel)]="SiteBlock.requestType">
+      <mat-select placeholder="Tipo de pedido" [(ngModel)]="SiteBlock.requestType" class="select">
         <mat-option *ngFor="let rType of requestTypes" [value]="rType.value">
           {{rType.title}}
         </mat-option>
@@ -34,7 +35,7 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <mat-select placeholder="Estado do Registo" [(ngModel)]="SiteBlock.status">
+      <mat-select placeholder="Estado do Registo" [(ngModel)]="SiteBlock.status" class="select">
         <mat-option *ngFor="let state of status" [value]="state.value">
           {{state.title}}
         </mat-option>
@@ -46,27 +47,29 @@
 <mat-grid-list cols="6" *ngFor="let site of SiteBlock.sites; let i = index" rowHeight="2:1">
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="ID" [(ngModel)]="SiteBlock.sites[i].siteId">
+      <input type="text" matInput placeholder="ID" [(ngModel)]="SiteBlock.sites[i].siteId" class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="Titular dos direitos" [(ngModel)]="SiteBlock.sites[i].contentOwner">
+      <input type="text" matInput placeholder="Titular dos direitos" [(ngModel)]="SiteBlock.sites[i].contentOwner"
+        class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="Site URI" [(ngModel)]="SiteBlock.sites[i].uRI">
+      <input type="text" matInput placeholder="Site URI" [(ngModel)]="SiteBlock.sites[i].uRI" class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data da Detecção" [(ngModel)]="SiteBlock.sites[i].detectionDate">
+      <input type="datetime-local" matInput placeholder="Data da Detecção" [(ngModel)]="SiteBlock.sites[i].detectionDate"
+        class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <mat-select placeholder="Tipo de Bloqueio" [(ngModel)]="SiteBlock.sites[i].blockType">
+      <mat-select placeholder="Tipo de Bloqueio" [(ngModel)]="SiteBlock.sites[i].blockType" class="select">
         <mat-option *ngFor="let bType of blockTypes" [value]="bType.value">
           {{bType.title}}
         </mat-option>
@@ -75,17 +78,19 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data de Inicio do Bloqueio" [(ngModel)]="SiteBlock.sites[i].validFrom">
+      <input type="datetime-local" matInput placeholder="Data de Inicio do Bloqueio" [(ngModel)]="SiteBlock.sites[i].validFrom"
+        class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <input type="datetime-local" matInput placeholder="Data de Fim do Bloqueio" [(ngModel)]="SiteBlock.sites[i].validTo">
+      <input type="datetime-local" matInput placeholder="Data de Fim do Bloqueio" [(ngModel)]="SiteBlock.sites[i].validTo"
+        class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
     <mat-form-field>
-      <mat-select placeholder="Estado do Site" [(ngModel)]="SiteBlock.sites[i].siteStatus">
+      <mat-select placeholder="Estado do Site" [(ngModel)]="SiteBlock.sites[i].siteStatus" class="select">
         <mat-option *ngFor="let state of siteStatus" [value]="state.value">
           {{state.title}}
         </mat-option>
@@ -94,12 +99,12 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <span *ngIf="i < SiteBlock.sites.length-1">
-      <button mat-button (click)="add()">
+      <button mat-raised-button (click)="add()">
         <mat-icon>delete</mat-icon>
       </button>
     </span>
     <span *ngIf="i == SiteBlock.sites.length-1">
-      <button mat-button (click)="add()">
+      <button mat-raised-button (click)="add()">
         <mat-icon>add</mat-icon>
       </button>
     </span>
@@ -115,16 +120,60 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <span *ngIf="i <= SiteBlock.files.length-1">
-      <button mat-button (click)="add()">
+      <button mat-raised-button (click)="add()">
         <mat-icon>delete</mat-icon>
       </button>
     </span>
   </mat-grid-tile>
 </mat-grid-list>
-<mat-grid-list cols="6" *ngFor="let file of SiteBlock.files; let i = index" rowHeight="1:1">
+<mat-grid-list cols="2" *ngFor="let file of SiteBlock.files; let i = index" rowHeight="6:1">
   <mat-grid-tile>
     <span *ngIf="i == SiteBlock.files.length-1">
-      <angular-file-uploader [config]="afuConfig"></angular-file-uploader>
+      <!-- angular-file-uploader [config]="afuConfig"></angular-file-uploader-->
+      <input type="file" ng2FileSelect [uploader]="uploader" />
+      <table class="table">
+          <thead>
+          <tr>
+              <th>Nome</th>
+              <th>Tamanho</th>
+              <th>Progreso</th>
+              <th>Status</th>
+              <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of uploader.queue">
+              <td><strong>{{ item?.file?.name }}</strong></td>
+              <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              <td>
+                  <div class="progress" style="margin-bottom: 0;">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                  </div>
+              </td>
+              <td class="text-center">
+                  <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                  <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                  <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+              </td>
+              <td nowrap>
+                  <button type="button" class="btn btn-success btn-xs"
+                          (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                      <span class="glyphicon glyphicon-upload"></span> Enviar
+                  </button>
+                  <button type="button" class="btn btn-warning btn-xs"
+                          (click)="item.cancel()" [disabled]="!item.isUploading">
+                      <span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+                  </button>
+                  <button type="button" class="btn btn-danger btn-xs"
+                          (click)="item.remove()">
+                      <span class="glyphicon glyphicon-trash"></span> Remover
+                  </button>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+
+
     </span>
   </mat-grid-tile>
 </mat-grid-list>

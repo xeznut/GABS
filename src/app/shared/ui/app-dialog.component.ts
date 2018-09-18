@@ -31,7 +31,7 @@ export class AppDialogComponent {
     detail = [data];
 
     const dialogRef = this.dialog.open(AppDialogComponent, {
-      data: { detail: detail, sites: '', history: '', colsToShow: colsToShow }
+      data: { detail: detail, sites: '', history: '', colsToShow: colsToShow, title: 'Detalhe da mensagem' }
     });
     dialogRef.afterClosed().subscribe(result => {
     });

@@ -1,4 +1,4 @@
-.mat-button {
+.mat-raised-button {
     min-width: 14px;
     padding: 0 5px;
 }
@@ -22,6 +22,13 @@ tr.mat-row:nth-child(even) {
 
 h2 {
     margin: 38px 0px 0px 0px !important;
-    font: 100 18px 'Roboto',sans-serif;
+    font: 100 18px 'Roboto', sans-serif;
     font-weight: bolder;
-  }
+}
+
+.input {
+    height: 34px;
+}
+.select {
+    height: 33px;
+}

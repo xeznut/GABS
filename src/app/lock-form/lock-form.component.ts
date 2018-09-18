@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  eStatus, eEntityCodes, eBlockTypes, eSiteStatus, eRequestTypes,
-  EnumUtils
-} from '../shared/enums';
+import {eStatus, eEntityCodes, eBlockTypes, eSiteStatus, eRequestTypes, EnumUtils } from '../shared/enums';
+import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'app-lock-form',
@@ -28,6 +26,8 @@ export class LockFormComponent implements OnInit {
     hideResetBtn: true,
     theme: 'attachPin '
   };
+
+  public uploader: FileUploader = new FileUploader({ url: 'api/your_upload', removeAfterUpload: false, autoUpload: true });
 
   constructor(private enumUtils: EnumUtils) { }
 

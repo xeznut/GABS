@@ -21,3 +21,14 @@ tr.mat-row:nth-child(even) {
 table {
     width: 100%;
 }
+
+.mat-raised-button {
+    min-width: 14px;
+    padding: 0 5px;
+}
+
+h2 {
+    margin: 18px 0px 18px 0px !important;
+    font: 100 18px 'Roboto', sans-serif;
+    font-weight: bolder;
+}
