@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {eStatus, eEntityCodes, eBlockTypes, eSiteStatus, eRequestTypes, EnumUtils } from '../shared/enums';
+import { eStatus, eEntityCodes, eBlockTypes, eSiteStatus, eRequestTypes, EnumUtils } from '../shared/enums';
 import { FileUploader } from 'ng2-file-upload';
 
 @Component({
@@ -18,7 +18,7 @@ export class LockFormComponent implements OnInit {
 
   afuConfig = {
     uploadAPI: {
-      url: 'https://example-file-upload-api',
+      url: 'https://localhost:3000',
     },
     multiple: false,
     formatsAllowed: '.docx,.pdf',
@@ -27,11 +27,35 @@ export class LockFormComponent implements OnInit {
     theme: 'attachPin '
   };
 
-  public uploader: FileUploader = new FileUploader({ url: 'api/your_upload', removeAfterUpload: false, autoUpload: true });
+  public uploader: FileUploader = new FileUploader({
+    url: 'http://localhost:3000/uploadFile',
+    removeAfterUpload: false,
+    autoUpload: true,
+    method: 'POST'
+  });
 
   constructor(private enumUtils: EnumUtils) { }
 
   ngOnInit() {
+    this.uploader.onBeforeUploadItem = (item) => {
+      item.withCredentials = false;
+    };
+
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      console.log('FileUpload:successfully uploaded:', item, status, response);
+      if (status === 201) {
+        alert('FileUpload: successfully');
+      } else {
+        alert('FileUpload:' + JSON.parse(response));
+      }
+    };
+
+    this.uploader.onErrorItem = (item: any, response: any, status: any, headers: any) => {
+        const error = JSON.parse(response); // error - server response
+        console.log(error);
+    };
+
+
     this.SiteBlock.sites = [];
     const s = {} as Site;
     s.uRI = 'http://somesite.com';
