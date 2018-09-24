@@ -43,11 +43,11 @@
     </mat-form-field>
   </mat-grid-tile>
 </mat-grid-list>
-<h2>Sites</h2>
+<h2>Site</h2>
 <mat-grid-list cols="6" *ngFor="let site of SiteBlock.sites; let i = index" rowHeight="2:1">
   <mat-grid-tile>
     <mat-form-field>
-      <input type="text" matInput placeholder="ID" [(ngModel)]="SiteBlock.sites[i].siteId" class="input">
+      <input type="text" matInput placeholder="ElementID" [(ngModel)]="SiteBlock.sites[i].siteId" class="input">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -97,20 +97,8 @@
       </mat-select>
     </mat-form-field>
   </mat-grid-tile>
-  <mat-grid-tile>
-    <span *ngIf="i < SiteBlock.sites.length-1">
-      <button mat-raised-button (click)="add()">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </span>
-    <span *ngIf="i == SiteBlock.sites.length-1">
-      <button mat-raised-button (click)="add()">
-        <mat-icon>add</mat-icon>
-      </button>
-    </span>
-  </mat-grid-tile>
 </mat-grid-list>
-<h2>Files</h2>
+<h2>Documentos</h2>
 <mat-grid-list cols="6" *ngFor="let file of SiteBlock.files; let i = index" rowHeight="4:1">
   <mat-grid-tile>
     <a href="#">{{SiteBlock.files[i].file}}</a>
@@ -189,5 +177,8 @@
   </button>
   <button mat-raised-button (click)="process()">
     <mat-icon>stop</mat-icon> Cancelar
+  </button>
+  <button mat-raised-button (click)="openDialog(element.history, 'history')">
+    <mat-icon>history</mat-icon> Histórico
   </button>
 </mat-toolbar>

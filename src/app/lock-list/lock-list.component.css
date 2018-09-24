@@ -26,3 +26,7 @@ tr.mat-row:nth-child(even) {
 .select {
     height: 33px;
 }
+
+.mat-raised-button {
+    margin-left: 10px;
+  }

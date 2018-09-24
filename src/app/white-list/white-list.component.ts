@@ -25,7 +25,6 @@ const ELEMENT_DATA: WLSite[] = [
 export class WhiteListComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'whitelistId',
     'uRI',
     'wlType',
     'wlState',

@@ -16,16 +16,6 @@ export class LockFormComponent implements OnInit {
   siteStatus = this.enumUtils.enumSelector(eSiteStatus);
   blockTypes = this.enumUtils.enumSelector(eBlockTypes);
 
-  afuConfig = {
-    uploadAPI: {
-      url: 'https://localhost:3000',
-    },
-    multiple: false,
-    formatsAllowed: '.docx,.pdf',
-    hideProgressBar: true,
-    hideResetBtn: true,
-    theme: 'attachPin '
-  };
 
   public uploader: FileUploader = new FileUploader({
     url: 'http://localhost:3000/uploadFile',
@@ -58,7 +48,7 @@ export class LockFormComponent implements OnInit {
 
     this.SiteBlock.sites = [];
     const s = {} as Site;
-    s.uRI = 'http://somesite.com';
+    s.uRI = 'somesite.com';
     s.siteId = '1';
     s.contentOwner = 'SportTV';
     s.detectionDate = '2018-09-08T15:43:00';
@@ -66,10 +56,7 @@ export class LockFormComponent implements OnInit {
     s.validFrom = '2018-09-10T13:45';
     s.validTo = '2018-09-11T13:45';
     s.siteStatus = eSiteStatus.Blocked,
-      this.SiteBlock.sites.push(s);
-    const s2 = {} as Site;
-    s2.uRI = '';
-    this.SiteBlock.sites.push(s2);
+    this.SiteBlock.sites.push(s);
 
     this.SiteBlock.files = [];
     const f = {} as File;
